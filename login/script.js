@@ -1,10 +1,21 @@
 $(document).ready(function () {
+
+    // usuário de teste
+    window.testUser = {
+        email: "teste@gmail.com",
+        password: "123456"
+    };
+
 });
 
 async function onClickLogin() {
     console.log('login');
     try {
         
+        // Obter valores do formulário
+        const email = $('#email').val();
+        const password = $('#password').val();
+
         //implementar tentativa de login
         let successfullyLogin = true;  //se logar com sucesso, mudar para true;
 
@@ -27,5 +38,5 @@ function onBadCredentials(msg) {
 }
 
 function onLoginSuccessfully() {
-    location.href = '/novo-curso/index.html'
+    location.href = '/index-curso/novo-curso/index.html'
 }
