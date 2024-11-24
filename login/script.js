@@ -27,5 +27,5 @@ function onBadCredentials(msg) {
 }
 
 function onLoginSuccessfully() {
-    location.href = '/novo-curso'
+    location.href = '/novo-curso/index.html'
 }
