@@ -1,0 +1,33 @@
+:root {
+    --dark-blue: #09101B;
+    --light-blue:#3C68D6;
+}
+
+.bg-dark-blue {
+    background-color: var(--dark-blue);
+}
+
+.bg-light-blue {
+    background-color: var(--light-blue);
+}
+
+.w-90 {
+    width: 90%;
+}
+
+.btn-dark-blue{
+    background-color: var(--dark-blue);
+    color: #fff;
+}
+
+.btn-dark-blue:active{
+    background-color: var(--dark-blue);
+    color: #fff;
+    opacity: 0.9;
+}
+
+.btn-dark-blue:hover{
+    background-color: var(--dark-blue);
+    color: #fff;
+    opacity: 0.9;
+}
