@@ -12,23 +12,23 @@ async function onClickSalvar() {
     try {
         // Obter os dados do curso do formulário
         const curso = {
-            nome: $('#nomeCurso').val().trim(),
-            descricao: $('#descricaoCurso').val().trim(),
-            plataforma: $('#plataforma').val().trim(),
-            autor: $('#autor').val().trim(),
+            name: $('#nomeCurso').val().trim(),
+            description: $('#descricaoCurso').val().trim(),
+            platform: $('#plataforma').val().trim(),
+            author: $('#autor').val().trim(),
             url: $('#url').val().trim(),
-            popularidade: $('#popularidade').val().trim(),
+            popularity: $('#popularidade').val().trim(),
             logo: $('#logo').val().trim(),
-            capa: $('#capa').var().trim()
+            banner: $('#capa').var().trim()
         };
 
         // Verificar se todos os campos obrigatorios foram preenchidos
-        if (!curso.nome?.trim() || !curso.url?.trim()) {
+        if (!curso.name?.trim() || !curso.url?.trim()) {
             return alert('Preencha todos os campos obrigatorios (nome e url) antes de salvar!');
         }
 
         // Enviar os dados para a API
-        const response = await fetch('http://localhost:3000/cursos', {
+        const response = await fetch('http://localhost:3000/courses', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

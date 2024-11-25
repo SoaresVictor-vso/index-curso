@@ -32,36 +32,52 @@ const courseListElement = document.getElementById('course-list');
 const searchInput = document.getElementById('search-input');
 
 // Function to display courses
-function displayCourses(filter = "") {
-    courseListElement.innerHTML = ""; // Clear previous content
+async function fetchCourses(filter = "") {
+    try {
+        // Fazendo a requisição ao servidor
+        const response = await fetch('/api/courses');
+        const courses = await response.json();
 
-    window.courses
-        .filter(course =>
+        // Filtrando os cursos (caso necessário)
+        const filteredCourses = courses.filter(course =>
             course.name.toLowerCase().includes(filter.toLowerCase()) ||
             course.author.toLowerCase().includes(filter.toLowerCase()) ||
             course.platform.toLowerCase().includes(filter.toLowerCase())
-        )
-        .forEach(course => {
-            const courseItem = document.createElement('div');
-            courseItem.className = "col-md-4 mb-4";
+        );
 
-            courseItem.innerHTML = `
-                <div class="card h-100 w-90 m-auto bg-light-blue">
-                    <img src="${course.image}" alt="${course.name}" class="course-image">
-                    <div class="card-body">
-                        <h5 class="card-title">${course.name}</h5>
-                        <p class="course-description">${course.description}</p>
-                        <p class="text-muted mb-1"><strong>Author:</strong> ${course.author}</p>
-                        <p class="text-muted"><strong>Platform:</strong> ${course.platform}</p>
-                    </div>
-                </div>
-            `;
-            courseListElement.appendChild(courseItem);
-        });
+        // Renderizando os cursos na página
+        displayCourses(filteredCourses);
+    } catch (error) {
+        console.error("Erro ao buscar os cursos:", error);
+    }
 }
 
+function displayCourses(courses) {
+    courseListElement.innerHTML = ""; // Limpa os cursos anteriores
 
-// Add search functionality
+    courses.forEach(course => {
+        const courseItem = document.createElement('div');
+        courseItem.className = "col-md-4 mb-4";
+
+        courseItem.innerHTML = `
+            <div class="card h-100 w-90 m-auto bg-light-blue">
+                <img src="${course.image}" alt="${course.name}" class="course-image">
+                <div class="card-body">
+                    <h5 class="card-title">${course.name}</h5>
+                    <p class="course-description">${course.description}</p>
+                    <p class="text-muted mb-1"><strong>Author:</strong> ${course.author}</p>
+                    <p class="text-muted"><strong>Platform:</strong> ${course.platform}</p>
+                </div>
+            </div>
+        `;
+        courseListElement.appendChild(courseItem);
+    });
+}
+
+// Evento de busca
 searchInput.addEventListener('input', () => {
-    displayCourses(searchInput.value);
+    fetchCourses(searchInput.value);
 });
+
+// Carregar cursos na inicialização
+fetchCourses();
